@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sorpresa Flor Amarilla</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: "Poppins", sans-serif;
+      overflow: hidden;
+    }
+
+    .pantalla {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .pantalla.activa {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Animación texto */
+    .texto {
+      font-size: 28px;
+      font-weight: 600;
+      opacity: 0;
+      animation: aparecer 2s ease forwards;
+    }
+
+    @keyframes aparecer {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Botón */
+    .btn {
+      margin-top: 40px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      background: #fff3b0;
+      color: #6a4c93;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background: #ffe066;
+      transform: scale(1.05);
+    }
+
+    /* Pantalla 1 */
+    #pantalla1 {
+      background: linear-gradient(to bottom, #fceabb, #f8b500);
+      color: #4a2c2a;
+      text-align: center;
+    }
+
+    /* Pantalla 2 */
+    #pantalla2 {
+      background: linear-gradient(to bottom, #e5989b, #b56576);
+      color: #f5f5dc;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Pantalla 3 (flor) */
+    #pantalla3 {
+      background: linear-gradient(to top, #c8e6c9, #fffde7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    svg {
+      width: 300px;
+      height: 400px;
+      animation: balanceo 4s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+
+    @keyframes balanceo {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(3deg); }
+      50% { transform: rotate(0deg); }
+      75% { transform: rotate(-3deg); }
+      100% { transform: rotate(0deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Pantalla 1 -->
+  <div class="pantalla activa" id="pantalla1">
+    <p class="texto">Hola a la mejor diseñadora gráfica del mundo ✨</p>
+    <button class="btn" onclick="mostrarPantalla(2)">Siguiente ➡</button>
+  </div>
+
+  <!-- Pantalla 2 -->
+  <div class="pantalla" id="pantalla2">
+    <p class="texto">Te mereces esta y todas las flores amarillas del mundo 🌼</p>
+    <button class="btn" onclick="mostrarPantalla(3)">Siguiente ➡</button>
+  </div>
+
+  <!-- Pantalla 3 -->
+  <div class="pantalla" id="pantalla3">
+    <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="petalGradient" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff176"/>
+          <stop offset="100%" stop-color="#fdd835"/>
+        </radialGradient>
+        <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#5d4037"/>
+          <stop offset="100%" stop-color="#3e2723"/>
+        </radialGradient>
+        <linearGradient id="stemGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#66bb6a"/>
+          <stop offset="100%" stop-color="#2e7d32"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Tallo -->
+      <rect x="95" y="140" width="10" height="150" rx="5" fill="url(#stemGradient)" />
+
+      <!-- Hojas -->
+      <ellipse cx="70" cy="200" rx="40" ry="20" fill="#388e3c" transform="rotate(-20,70,200)" />
+      <ellipse cx="130" cy="240" rx="40" ry="20" fill="#2e7d32" transform="rotate(20,130,240)" />
+
+      <!-- Pétalos -->
+      <g transform="translate(100,120)">
+        <ellipse rx="20" ry="60" fill="url(#petalGradient)" transform="rotate(0) translate(0,-50)" />
+        <ellipse rx="20" ry="60" fill="url(#petalGradient)" transform="rotate(45) translate(0,-50)" />
+        <ellipse rx="20" ry="60" fill="url(#petalGradient)" transform="rotate(90) translate(0,-50)" />
+        <ellipse rx="20" ry="60" fill="url(#petalGradient)" transform="rotate(135) translate(0,-50)" />
+        <ellipse rx="20" ry="60" fill="url(#petalGradient)" transform="rotate(180) translate(0,-50)" />
+        <ellipse rx="20" ry="60" fill="url(#petalGradient)" transform="rotate(225) translate(0,-50)" />
+        <ellipse rx="20" ry="60" fill="url(#petalGradient)" transform="rotate(270) translate(0,-50)" />
+        <ellipse rx="20" ry="60" fill="url(#petalGradient)" transform="rotate(315) translate(0,-50)" />
+      </g>
+
+      <!-- Centro -->
+      <circle cx="100" cy="120" r="25" fill="url(#centerGradient)" />
+
+      <!-- Semillitas -->
+      <g fill="#ffeb3b">
+        <circle cx="90" cy="115" r="3"/>
+        <circle cx="110" cy="115" r="3"/>
+        <circle cx="95" cy="130" r="3"/>
+        <circle cx="105" cy="130" r="3"/>
+        <circle cx="100" cy="110" r="3"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Librería confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+  <script>
+    function mostrarPantalla(num) {
+      document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+      let pantalla = document.getElementById('pantalla' + num);
+      pantalla.classList.add('activa');
+
+      // 🎉 confeti al llegar a la pantalla 3
+      if (num === 3) {
+        lanzarConfeti();
+      }
+    }
+
+    function lanzarConfeti() {
+      var duration = 3 * 1000;
+      var end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  </script>
+</body>
+</html>
